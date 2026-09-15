@@ -19,6 +19,7 @@ API key, no cloud.
 | `technical_summary.md` | Technical write-up (environment, approach, findings, limitations) |
 | `self_review.md` | Self-review against the checklist before submission |
 | `verify_project.py` | Final integrity check — `python3 verify_project.py` |
+| `test_day1.py` | **"Markdown == live recompute" tests** — `python3 test_day1.py` |
 | `requirements.txt` | Python deps (`tiktoken==0.14.0`, `jupyter`, `nbformat`) |
 
 ## Prerequisites — Ollama and the two models
@@ -76,8 +77,16 @@ curl -s http://localhost:11434/api/tags
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-python3 verify_project.py          # integrity audit (exit 0 = all pass)
+python3 test_day1.py              # "markdown == live recompute" tests (exit 0 = no drift)
+python3 verify_project.py         # full integrity audit (structure + evidence + notebook + live models)
 ```
+
+**What `test_day1.py` proves:** deterministic artifacts (tokenizer math, context-window
+turn counts) are recomputed from the actual `part_a` sources and asserted *exactly*
+against both the notebook cell outputs and the markdown claims — the zero-markdown-drift
+guarantee. Model cells (llama/R1) are stateful, so they're checked *structurally*
+(valid JSON, viable risk label) rather than byte-for-byte; the notebook's Reproducibility
+notes explain this split explicitly.
 
 ## Run the notebook (two ways)
 
