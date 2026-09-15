@@ -1,0 +1,64 @@
+=== ROLE PROMPTING: llama3.2:3b ===
+PROMPT:
+"""Week 07 Day 1 · Part B #3b — Role prompting for the SAME loan classification task.
+Zero-shot/few-shot tasks were evaluated without a persona. Here we add an explicit
+role to condition which training patterns the model draws on.
+
+Role chosen deliberately: 'senior credit risk analyst' — domain-grounded, justifiable
+for a banking-adjacent task, and a realistic production persona for this payload type.
+'Why not X': a generic 'you are a helpful assistant' persona was rejected because it
+adds nothing beyond the task instruction (no conditioning value)."""
+
+ROLE_PROMPT = """You are a senior credit risk analyst at a Tier-1 bank with 20 years of
+underwriting experience. Your judgment determines whether the bank accepts or rejects
+a loan application, so you are careful, precise, and evidence-based in every assessment.
+You calibrate your risk levels to real banking practice: repayment capacity, credit
+history, and exposure relative to income drive your decision.
+
+Read the applicant description and classify the loan as 'low_risk', 'medium_risk', or
+'high_risk'. Answer in a fixed JSON object exactly:
+{"risk": "<level>", "reason": "<one short sentence>"}
+
+Applicant: A civil engineer with 6 years tenure at the same firm, no defaults on record,
+monthly income 3.4x the requested loan installment.
+
+Answer:"""
+
+if __name__ == "__main__":
+    print(ROLE_PROMPT)--- RUN ---
+=== RESPONSE ===
+{"risk": "low_risk", "reason": "stable income and no credit history issues"}
+
+temperature: 0.1
+eval_count: 21
+eval_duration_s: 2.16
+=== ROLE PROMPTING: deepseek-r1:8b ===
+--- RUN ---
+=== THINKING ===
+Hmm, the user is asking me to act as a senior credit risk analyst with 20 years of experience. They want me to classify a loan application as low, medium, or high risk based on the applicant description provided.
+
+The applicant is a civil engineer with 6 years at the same firm, no defaults on record, and their monthly income is 3.4 times the requested loan installment. This is a straightforward case, but I need to think through it carefully to give the best analysis.
+
+As a credit risk analyst, my primary focus is on repayment capacity, credit history, and exposure relative to income. These are the key factors in real banking practice.
+
+The applicant has a stable job with 6 years tenure, which suggests good employment history and reliability. No defaults mean a clean credit past, which is positive. The income being 3.4 times the installment is a strong indicator - it means they can easily afford the payments with a comfortable margin.
+
+I should consider what the thresholds might be in banking. Typically, income multiples above 4-5 might be considered low risk, but 3.4 is still quite healthy. The tenure shows they're not just passing through jobs but building a career, reducing job instability risk.
+
+The user might be testing my knowledge or simulating a real scenario. They could be a student, a new analyst, or even someone in the banking industry looking for insights. Their actual need is probably to get a quick, accurate classification, but deeper down, they might want to understand the reasoning behind it to build better risk assessment skills or to apply this in their own work.
+
+Based on my experience, this applicant seems solid. The income multiple is high enough to cover potential downturns, and the no defaults reinforce trustworthiness. I don't see any red flags here.
+
+I need to respond in a fixed JSON format: {"risk": "<level>", "reason": "<one short sentence>"} with just one short sentence for the reason. So, I'll keep it concise and evidence-based.
+
+My final answer should be low_risk because the applicant has strong repayment capacity and a clean credit history.
+
+
+=== RESPONSE ===
+```json
+{"risk": "low_risk", "reason": "The applicant has a stable job, clean credit history, and sufficient income relative to the loan installment."}
+```
+
+temperature: 0.1
+eval_count: 474
+eval_duration_s: 127.81

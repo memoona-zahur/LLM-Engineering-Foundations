@@ -1,0 +1,14 @@
+=== CASE 1: 4K window (llama3.2:3b local default), system prompt 200 tokens ===
+  window=4096, per-turn=50+150=200, system=200
+  -> usable=3896, max FULL turns = 19 (then ~96 tokens left)
+  So after ~19 back-and-forth turns the oldest part of the convo is dropped.
+
+=== CASE 2: 8K window (deepseek-r1:8b), each side longer ===
+  window=8192, per-turn=120+400=520, system=500
+  -> usable=7692, max FULL turns = 14 (that leaves ~412 tokens)
+  So ~14 exchanges in, the conversation history silently truncates.
+
+=== INTERPRETATION ===
+'The model forgot what I said earlier' is almost always this truncation, not a
+memory bug in the model. The model has NO memory outside the current request;
+whatever sends the request drops older turns to fit the window.

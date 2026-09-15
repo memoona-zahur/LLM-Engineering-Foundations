@@ -1,0 +1,25 @@
+=== PART #10 — Resource Usage Impressions ===
+
+MODELS INSTALLED:
+- llama3.2:3b  | Q4_K_M | 3.2B params | context: 131,072 | 2.0 GB on disk
+- deepseek-r1:8b | Q4_K_M | 8.2B params | context: 131,072 | 5.2 GB on disk
+- Total disk: 6.8 GB (incl. runtime libs)
+
+HOST MACHINE:
+- RAM: 31.1 GiB total, ~26 GiB available
+- CPU-only (Intel UHD 620 — Vulkan GPU detected but not used by Ollama)
+- Disk: 413 GB free
+
+PERFORMANCE (CPU-only, no GPU offload):
+- llama3.2:3b: 120 eval tokens in 11.4s = ~10.5 tokens/sec. Noticeable delay (~1s)
+  before first token appears; then steady stream. Acceptable for interactive use.
+- deepseek-r1:8b: 411 eval tokens in 105s = ~3.9 tokens/sec. Noticeably slower.
+  Each token ~250ms. With thinking enabled, total time 10+ minutes for a single
+  query — the model can spend most of that time on internal reasoning tokens,
+  not output tokens.
+
+IMPRESSION:
+- llama3.2:3b is fast enough for a chat-style workflow; the delay is tolerable
+- deepseek-r1:8b with thinking is much slower and can get stuck (see #9 finding)
+- Both load into RAM seamlessly, no swap, no crash
+- First-time cold start after `ollama run` takes 2-3 seconds (model load into RAM)

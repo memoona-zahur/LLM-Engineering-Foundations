@@ -1,0 +1,27 @@
+=== PART #9 — Chain-of-Thought vs R1 Unprompted Reasoning: Contrast ===
+
+REFERENCE CORRECT ANSWER:
+- Offer 1: 6% flat × $10,000 × 2 years = $1,200 interest → total $11,200
+- Offer 2: 4.5% flat × $10,000 × 3 years = $1,350 interest → total $11,350
+- LOWER = Offer 1 (by $150)
+
+WHAT LLAMA3.2:3b DID:
+- NO-CoT: Said "Offer 2" — WRONG answer, no reasoning shown
+- WITH-CoT: Showed steps but calculated interest as 10000 × 0.06 × 24 = $14,400
+  (confused months with years in formula). Still wrong but showed reasoning
+
+WHAT DEEPSEEK-R1:8b DID (NO-CoT, thinking enabled):
+- Unprompted reasoning: began reasoning correctly (simple interest = $1,200 for Offer 1)
+- Then spiraled into an analysis loop about the AMBIGUITY of "flat rate" terminology
+  and missing repayment structure for Offer 2
+- Never produced a final answer (timed out at 10+ minutes of reasoning)
+- The model was not confused by the math but by the REAL ambiguity it detected
+
+TWO-SENTENCE CONTRAST:
+"A model that reasons because you asked it to (Llama CoT) follows the requested
+step structure mechanically, which can produce wrong math if the formula is wrong but
+at least reaches an answer. A model that reasons because that's how it was trained
+to respond (R1) will go deeper — in this case detecting genuine ambiguity that a
+simpler model misses — but can get stuck in over-analysis rather than reaching
+a conclusion. For straightforward tasks, asked-reasoning reaches an answer; for
+ambiguous tasks, unprompted reasoning reveals hidden complexity but may never resolve it."

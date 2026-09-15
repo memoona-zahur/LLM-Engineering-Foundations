@@ -1,0 +1,5 @@
+--- ZERO-SHOT ---
+{"risk": "low_risk", "reason": "stable income and no credit history issues"}
+
+--- FEW-SHOT ---
+{"risk": "low_risk", "reason": "stable employment, clean record, and a high income relative to loan installment"}

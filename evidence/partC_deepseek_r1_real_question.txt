@@ -1,0 +1,6 @@
+1.  **Repayment Capacity:** Assess income stability, employment status, and existing debt obligations to ensure the borrower can afford the monthly payments.
+2.  **Creditworthiness:** Check credit score and history to evaluate the borrower's reliability in managing past debts.
+3.  **Loan Affordability:** Verify that the proposed loan amount and repayment terms fit comfortably within the borrower's budget and financial obligations.
+
+eval_count: 404
+eval_duration_s: 104.53

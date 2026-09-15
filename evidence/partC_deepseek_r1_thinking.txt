@@ -1,0 +1,23 @@
+=== THINKING ===
+The user asked for the three most important things a bank should check before approving a personal loan, and they want it answered concisely in three numbered points. I need to make sure my response is direct and to the point, avoiding any fluff.
+
+First, I should think about what banks prioritize when assessing loan applications. Personal loans are risky for banks, so they focus on minimizing defaults. The key factors are usually related to the borrower's ability to repay and their financial stability.
+
+The most critical thing is the borrower's repayment ability. This involves looking at income sources, job stability, and existing debts. If someone can't afford the payments, the loan is unlikely to be approved. I'll call this point 1.
+
+Next, credit history is essential. It shows how responsible the borrower has been with past debts. A poor credit score or history might indicate higher risk, so banks check that to gauge trustworthiness. Point 2.
+
+Finally, the loan amount and purpose matter. Banks want to ensure the loan isn't excessive for the borrower's income and that it's for a legitimate reason. This helps in assessing affordability and the loan's necessity. Point 3.
+
+I should keep the response numbered and concise, as specified. Also, consider the user's deeper needs: they might be applying for a loan themselves or researching for educational purposes. By providing clear, standard criteria, I'm helping them understand the bank's perspective, which could build trust or prepare them for the application process.
+
+Overall, my answer should be factual, based on common banking practices, and empathetic by addressing potential unspoken concerns about loan approval.
+
+
+=== RESPONSE ===
+1.  **Repayment Ability:** Assessing income stability and sources to ensure the borrower can afford the monthly payments.
+2.  **Credit History:** Reviewing past borrowing and repayment behavior (credit score, report) to evaluate trustworthiness.
+3.  **Loan Purpose & Amount:** Verifying the loan amount requested is reasonable for the stated purpose and that the purpose is legitimate.
+
+eval_count: 411
+eval_duration_s: 101.94

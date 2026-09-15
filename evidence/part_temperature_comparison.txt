@@ -1,0 +1,44 @@
+=== TEMPERATURE COMPARISON: llama3.2:3b, same prompt ===
+PROMPT: List 3 reasons why a bank might reject a loan application. Number them 1-3.
+
+--- temperature=0.0 ---
+=== RESPONSE ===
+Here are 3 reasons why a bank might reject a loan application:
+
+1. **Insufficient Credit History or Poor Credit Score**: If the applicant has a limited or poor credit history, the bank may be hesitant to lend to them. This could be due to a lack of payment history, high credit utilization, or a history of late payments.
+
+2. **Inadequate Income or Unstable Employment**: If the applicant's income is not stable or sufficient to support the loan repayments, the bank may reject the application. This could be due to a lack of a steady income, a history of job changes, or a low income relative to the loan amount.
+
+3. **High Debt-to-Income Ratio or Excessive Assets**: If the applicant's debt-to-income ratio is too high or they have excessive assets that could be used to secure the loan, the bank may reject the application. This could be due to a high level of existing debt, such as credit card balances or other loans, or assets that are not liquid enough to be used as collateral.
+
+temperature: 0.0
+eval_count: 214
+eval_duration_s: 24.11
+
+--- temperature=0.8 ---
+=== RESPONSE ===
+Here are three reasons why a bank might reject a loan application:
+
+1. **Insufficient Credit Score**: The bank may reject a loan application if the applicant's credit score is too low. A low credit score indicates a higher risk of default, and the bank may not want to lend money to someone with a poor credit history.
+
+2. **Inadequate Collateral or Security**: If the applicant does not have sufficient collateral or security to back up the loan, the bank may reject the application. This could be due to a lack of assets, a weak financial position, or an inability to provide adequate guarantees.
+
+3. **Inadequate Income or Cash Flow**: The bank may reject a loan application if the applicant's income or cash flow is not sufficient to service the loan. This could be due to a lack of a steady income, irregular income, or an inability to demonstrate a stable financial position.
+
+temperature: 0.8
+eval_count: 183
+eval_duration_s: 20.57
+
+--- temperature=1.5 ---
+=== RESPONSE ===
+Here are three reasons why a bank might reject a loan application:
+
+1. **Insufficient Credit History or Poor Credit Score**: If an individual or business has a thin credit history or a poor credit score, the bank may not feel confident that they will be able to repay the loan. This could be due to a lack of credit activity, high levels of debt, or past defaults or late payments.
+
+2. **Inadequate Income or Cash Flow**: If the loan application does not demonstrate sufficient income or cash flow to support the loan repayments, the bank may be unwilling to lend. This could be due to a low income, variable income, or a history of business fluctuations.
+
+3. **High Debt-to-Income Ratio or Excessive Risk**: If an individual or business has a high debt-to-income ratio or has taken on too much risk with the loan, the bank may decide not to approve the loan. This could include borrowing too much relative to income, or taking on loans with high interest rates or fees that make the loan unaffordable.
+
+temperature: 1.5
+eval_count: 213
+eval_duration_s: 22.58

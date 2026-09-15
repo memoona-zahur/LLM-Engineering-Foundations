@@ -1,0 +1,64 @@
+=== INPUT TEXT ===
+Completed an in-depth, concept-by-concept walkthrough of the ML Pipeline Practical: went through the entire pipeline one step at a time and for each step wrote down its core concept in a line and re-verified its actual numbers from a fresh live run.
+
+Characters: 249
+Words: 42
+Tokens: 51
+Tokens per word (avg): 1.21
+Tokens per character (avg): 0.205
+
+=== SURPRISING / INTERESTING TOKEN BOUNDARIES ===
+  token#00 = 'Completed'
+  token#01 = ' an'
+  token#02 = ' in'
+  token#03 = '-depth'
+  token#04 = ','
+  token#05 = ' concept'
+  token#06 = '-by'
+  token#07 = '-con'
+  token#08 = 'cept'
+  token#09 = ' walkthrough'
+  token#10 = ' of'
+  token#11 = ' the'
+  token#12 = ' ML'
+  token#13 = ' Pipeline'
+  token#14 = ' Practical'
+  token#15 = ':'
+  token#16 = ' went'
+  token#17 = ' through'
+  token#18 = ' the'
+  token#19 = ' entire'
+  token#20 = ' pipeline'
+  token#21 = ' one'
+  token#22 = ' step'
+  token#23 = ' at'
+  token#24 = ' a'
+  token#25 = ' time'
+  token#26 = ' and'
+  token#27 = ' for'
+  token#28 = ' each'
+  token#29 = ' step'
+  token#30 = ' wrote'
+  token#31 = ' down'
+  token#32 = ' its'
+  token#33 = ' core'
+  token#34 = ' concept'
+  token#35 = ' in'
+  token#36 = ' a'
+  token#37 = ' line'
+  token#38 = ' and'
+  token#39 = ' re'
+  token#40 = '-'
+  token#41 = 'verified'
+  token#42 = ' its'
+  token#43 = ' actual'
+  token#44 = ' numbers'
+  token#45 = ' from'
+  token#46 = ' a'
+  token#47 = ' fresh'
+  token#48 = ' live'
+  token#49 = ' run'
+  token#50 = '.'
+
+=== TOKENIZED VIEW (token boundaries shown) ===
+[Completed] [ an] [ in] [-depth] [,] [ concept] [-by] [-con] [cept] [ walkthrough] [ of] [ the] [ ML] [ Pipeline] [ Practical] [:] [ went] [ through] [ the] [ entire] [ pipeline] [ one] [ step] [ at] [ a] [ time] [ and] [ for] [ each] [ step] [ wrote] [ down] [ its] [ core] [ concept] [ in] [ a] [ line] [ and] [ re] [-] [verified] [ its] [ actual] [ numbers] [ from] [ a] [ fresh] [ live] [ run] [.] 

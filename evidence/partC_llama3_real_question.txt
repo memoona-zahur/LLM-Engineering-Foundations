@@ -1,0 +1,8 @@
+Here are the 3 most important things a bank should check before approving a personal loan:
+
+1. **Creditworthiness**: Verify the borrower's credit score, credit history, and debt-to-income ratio to assess their ability to repay the loan.
+2. **Income and Employment Stability**: Confirm the borrower's income, employment status, and job security to ensure they can afford the loan repayments.
+3. **Debt-to-Income Ratio**: Calculate the borrower's debt-to-income ratio to ensure they have a manageable amount of debt and can afford the loan repayments without overextending themselves.
+
+eval_count: 120
+eval_duration_s: 11.44
