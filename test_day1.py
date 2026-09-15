@@ -138,5 +138,19 @@ check("stateful" in markdown_all or "stateful sampling" in markdown_all or "run-
 check("not deterministic" in markdown_all or "not bit-fixed" in markdown_all,
       "markdown explicitly says model output is not deterministic/bit-fixed")
 
+print("\n== 6. Cross-document consistency (evidence files agree with markdown) ==")
+evidence_dir = os.path.join(ROOT, "evidence")
+part10_path = os.path.join(evidence_dir, "part10_resource_usage.txt")
+with open(part10_path, encoding="utf-8") as f:
+    part10 = f.read()
+# A2 uses Ollama default windows; part10 lists model max; both must be explained
+check("131,072" in part10, "part10 evidence lists model max context (131,072)")
+check("131,072" in markdown_all,
+      "markdown mentions model max context (131,072) — no reader left wondering")
+check("num_ctx" in part10 or "default" in part10.lower(),
+      "part10 evidence explains default vs model max distinction")
+check("num_ctx" in markdown_all or ("default" in markdown_all and "4K" in markdown_all),
+      "markdown explains Ollama default windows vs model max")
+
 print("\n" + ("ALL TESTS PASSED" if not FAIL else f"{len(FAIL)} TEST(S) FAILED"))
 sys.exit(0 if not FAIL else 1)

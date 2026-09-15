@@ -5,6 +5,10 @@ MODELS INSTALLED:
 - deepseek-r1:8b | Q4_K_M | 8.2B params | context: 131,072 | 5.2 GB on disk
 - Total disk: 6.8 GB (incl. runtime libs)
 
+NOTE: 131,072 is each model's architectural max context. Ollama defaults to
+`num_ctx=4096` (4K) for llama3.2:3b and `num_ctx=8192` (8K) for deepseek-r1:8b.
+A2's turn arithmetic uses these default runtime windows, not the model max.
+
 HOST MACHINE:
 - RAM: 31.1 GiB total, ~26 GiB available
 - CPU-only (Intel UHD 620 — Vulkan GPU detected but not used by Ollama)
