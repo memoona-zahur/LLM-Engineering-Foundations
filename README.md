@@ -21,17 +21,70 @@ API key, no cloud.
 | `verify_project.py` | Final integrity check — `python3 verify_project.py` |
 | `requirements.txt` | Python deps (`tiktoken==0.14.0`, `jupyter`, `nbformat`) |
 
-## Quick start
+## Prerequisites — Ollama and the two models
+
+The notebook talks **only** to your local Ollama server at `http://localhost:11434`.
+There is **no hosted API, no API key, no network dependency** after the models are
+downloaded. So before anything else, this must work:
+
+```bash
+ollama --version   # if this fails, Ollama is not installed
+```
+
+### Step 1 — Install Ollama (Linux)
+
+```bash
+sudo snap install ollama
+ollama --version        # should print 0.33.x or newer
+```
+
+### Step 2 — Pull the two models (one-time download, ~7.2 GB total)
+
+```bash
+ollama pull llama3.2:3b       # 2.0 GB
+ollama pull deepseek-r1:8b    # 5.2 GB
+ollama list                   # both models must appear here
+```
+
+### Step 3 — Smoke-test each model before running the notebook
+
+```bash
+ollama run llama3.2:3b        # type a question, press Enter; exit with /bye
+ollama run deepseek-r1:8b     # this one shows its own reasoning before the answer
+```
+
+### Step 4 — Confirm the server is up (do this right before the notebook)
+
+```bash
+curl -s http://localhost:11434/api/tags
+# Should print JSON containing both model names. Empty/failing response
+# means the server is down — restart it:
+# sudo snap restart ollama
+```
+
+> **Common mistake #1:** opening the notebook while Ollama is stopped. The model
+> cells will fail. Fix: start Ollama (`ollama serve` or `sudo snap restart ollama`),
+> re-run `curl` above, then **Restart & Run All** again.
+>
+> **Common mistake #2:** skipping the pull. If you get
+> `Error: pull model manifest: ... not found`, you pulled nothing — run
+> `ollama pull` for both names exactly as written above.
+
+## Quick start — Python environment
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 python3 verify_project.py          # integrity audit (exit 0 = all pass)
-ollama --version                   # needs Ollama 0.33+ running locally
 ```
 
-To re-run the notebook:
+## Run the notebook (two ways)
+
+**Option A — in Jupyter:** `jupyter notebook day1_llm_foundations.ipynb`, then
+**Kernel → Restart & Run All**.
+
+**Option B — headless:**
 
 ```bash
 python3 -m nbconvert --to notebook --execute --inplace \
@@ -40,6 +93,11 @@ python3 -m nbconvert --to notebook --execute --inplace \
 
 Expected wall time ≈ 5–7 minutes (the two DeepSeek live cells dominate; the unbounded
 R1 puzzle is quoted from evidence rather than re-run).
+
+> **Common mistake #3:** stopping the run mid-way (especially during a DeepSeek cell).
+> This can leave a zombie generation on the server that blocks every later model call.
+> Fix: `sudo snap restart ollama`, then re-run. This is exactly why the notebook's T3
+> cell quotes the R1 puzzle from evidence instead of re-running it live.
 
 ## The five headline findings
 
