@@ -152,5 +152,13 @@ check("num_ctx" in part10 or "default" in part10.lower(),
 check("num_ctx" in markdown_all or ("default" in markdown_all and "4K" in markdown_all),
       "markdown explains Ollama default windows vs model max")
 
+# No unescaped $ followed by a digit in any markdown cell (GitHub renders $...$ as math)
+md_cells = [c for c in nb.cells if c.cell_type == "markdown"]
+for mc in md_cells:
+    for ln in mc.source.split("\n"):
+        bad = re.findall(r'(?<!\\)\$[0-9]', ln)
+        check(not bad,
+              f"no unescaped $ before digit in markdown: {ln[:60]!r}")
+
 print("\n" + ("ALL TESTS PASSED" if not FAIL else f"{len(FAIL)} TEST(S) FAILED"))
 sys.exit(0 if not FAIL else 1)
