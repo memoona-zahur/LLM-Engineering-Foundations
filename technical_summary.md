@@ -42,7 +42,8 @@ re-checks structure, key numbers, notebook health, and live model availability.
   tokens to fit the window — not because the model's memory fades.
 - **Quantization:** Q4 (4-bit) GGUF files let 3.2B and 8.2B models run in RAM that could
   never hold their ~6–16 GB full-precision weights; the exact tag is `Q4_K_M`
-  (4-bit, k-means, medium).
+  (4-bit K-quantization, medium variant — K is the llama.cpp K-quant scheme family,
+  not k-means; M keeps a few sensitive tensors at higher precision).
 
 ### Part B — prompting techniques (all applied to the same loan-classification task)
 | Technique | Live result (llama3.2:3b) |

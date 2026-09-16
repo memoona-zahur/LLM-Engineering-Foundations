@@ -30,9 +30,17 @@ def check(cond, msg):
 
 
 def recompute_tokenizer():
-    """Live recompute from the actual source module — single source of truth."""
-    import tokenizer_exercise  # noqa: F401  (module computes at import, prints below)
-    return 51, 42, round(51 / 42, 2), round(51 / 249, 3)   # computed in module
+    """Live recompute from the actual source module — single source of truth.
+
+    Unlike a hardcoded fixture, this reads the module's own computed variables
+    (MY_WRITING / TOKENS / WORDS), so the numbers under test are exactly the
+    module's values, not literals re-typed in the test.
+    """
+    import tokenizer_exercise as te  # noqa: F401  (module computes at import, prints below)
+    n_tok = len(te.TOKENS)
+    n_words = len(te.WORDS)
+    n_chars = len(te.MY_WRITING)
+    return n_tok, n_words, round(n_tok / n_words, 2), round(n_tok / n_chars, 3)
 
 
 def recompute_context_window():
