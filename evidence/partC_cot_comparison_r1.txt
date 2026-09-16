@@ -1,25 +1,39 @@
---- R1 NO-CoT ---
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-  File "/usr/lib/python3.10/json/__init__.py", line 293, in load
-    return loads(fp.read(),
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 355, in raw_decode
-    raise JSONDecodeError("Expecting value", s, err.value) from None
-json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+=== R1 WITH-CoT — deepseek-r1:8b, bounded streaming capture ===
 
---- R1 WITH-CoT ---
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-  File "/usr/lib/python3.10/json/__init__.py", line 293, in load
-    return loads(fp.read(),
-  File "/usr/lib/python3.10/json/__init__.py", line 346, in loads
-    return _default_decoder.decode(s)
-  File "/usr/lib/python3.10/json/decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "/usr/lib/python3.10/json/decoder.py", line 355, in raw_decode
-    raise JSONDecodeError("Expecting value", s, err.value) from None
-json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+EXPERIMENT:
+- Prompt: the WITH-CoT loan-compare prompt (offers: $10,000 @6%/2yr vs $10,000 @4.5%/3yr,
+  "Think step by step: 1..5")
+- Model: deepseek-r1:8b (Q4_K_M, 8.2B, thinking-capable)
+- Parameters: temperature 0.1, think=True, stream=True
+- Policy: bounded run — capture whatever arrives for 220 s, then stop.
+  An unbounded run can drive R1 into a long reasoning loop on this ambiguous
+  'flat annual rate' puzzle (see T3 / part9_cot_contrast_analysis.txt).
+
+OUTCOME: no final answer within 220 s (done=False). The stream produced 865
+token chunks of 'thinking' tokens and reached a blank final 'response' section.
+
+WHAT R1 DID WITH THE PROMPTED CoT:
+1. Restated the task and correctly began: simple interest on Offer 1 =
+   $10,000 x 0.06 x 2 = $1,200 interest -> total $11,200 (CORRECT so far).
+2. Then pivoted to questioning the repayment structure ('24 equal monthly
+   installments' vs 'flat annual rate') and re-derived per-installment math,
+   looping on the ambiguity instead of settling.
+
+THINKING — HEAD (first ~900 chars):
+I need to figure out which loan offer has the lower total amount repaid. There are two offers: one is $10,000 at a flat annual interest rate of 6% for 2 years, with 24 equal monthly installments. The second is $10,000 at 4.5% for 3 years. I should compute the total interest for each and then add the principal to get the total repayment, and finally compare them.First, let's look at offer 1: $10,000 at 6% flat annual interest for 2 years, paid in 24 monthly installments.A flat interest rate means that the interest is calculated on the principal for the entire loan period, and then it's divided equally over the monthly payments. But in this case, since it's a fixed annual rate and we're repaying monthly, I think I need to find out how the monthly payments are structured.The problem says "flat annual interest rate," which might be a bit ambiguous. In some contexts, a flat rate means the int
+
+THINKING — TAIL (last ~700 chars):
+out compounding, but for monthly payments, it's still an amortized loan with simple interest.I'm getting confused.Let me look for standard interpretation.In many contexts, a flat interest rate is used for short-term loans or something, but here it's monthly installments.Another way: sometimes "flat rate" means that the interest is calculated on the original amount for the entire period, and then the monthly payment is the principal plus interest divided by months.For example, for a $10,000 loan at 6% flat for 2 years, total interest = 10000 * 0.06 * 2 = $1,200.Then, total amount to repay = $10,000 + $1,200 = $11,200.Then, since there are 24 monthly installments, each payment would be $11,200
+
+COMPARISON POINT vs LLAMA3.2:3b:
+- Llama WITH-CoT (partC_cot_comparison_llama.txt): visibly followed the requested
+  5-step structure and REACHED a conclusion (though the math was wrong: it used
+  24 months where it should use 2 years). Asked-reasoning is auditable and settles.
+- R1 WITH-CoT (this file): even WITH the step-by-step skeleton provided, the
+  trained-to-reason model went deeper unprompted — noticed the 'flat rate /
+  installment' ambiguity, over-analyzed, and did not settle within the time budget.
+
+This is consistent with the two-sentence contrast in part9_cot_contrast_analysis.txt.
+NOTE: PartC_cot_comparison_r1.txt previously contained only JSONDecodeError
+tracebacks from a failed non-streaming attempt; it was replaced with this honest
+bounded-capture record.
